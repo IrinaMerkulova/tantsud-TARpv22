@@ -11,6 +11,22 @@ if(isset($_REQUEST["paarinimi"]) && !empty($_REQUEST["paarinimi"])){
     $yhendus->close();
     //exit();
 }
+//kommentaaride lisamine
+
+if(isset($_REQUEST["komment"])){
+    if(!empty($_REQUEST["uuskomment"])){
+    global $yhendus;
+    $kask = $yhendus->prepare("UPDATE tantsud SET kommentaarid=CONCAT(kommentaarid, ?) WHERE id=?");
+    $kommentplus=$_REQUEST["uuskomment"]."\n";
+    $kask->bind_param("si", $kommentplus, $_REQUEST["komment"]);
+    $kask->execute();
+    header("Location: $_SERVER[PHP_SELF]");
+    $yhendus->close();
+    //exit();
+}
+}
+
+
 // punktide lisamine
 if(isset($_REQUEST["heatants"])){
     global $yhendus;
@@ -80,6 +96,7 @@ if (isset($_SESSION["kasutaja"])) {
         echo "<td>".$punktid."</td>";
         echo "<td>".$paev."</td>";
         echo "<td>".$komment."</td>";
+        $komment=nl2br(htmlspecialchars($komment));
         echo "<td>
 <form action='?'>
         <input type='hidden'  value='$id' name='komment'>
