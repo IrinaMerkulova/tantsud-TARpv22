@@ -65,12 +65,13 @@ if (isset($_SESSION["kasutaja"])) {
         <th>Tantsupaari nimi</th>
         <th>Punktid</th>
         <th>Kuupäev</th>
+        <th>Kommentaarid</th>
     </tr>
 <?php
 // ! + knopka tab - näitab html koodi algus
     global $yhendus;
-    $kask=$yhendus->prepare("SELECT id, tantsupaar, punktid, ava_paev FROM tantsud WHERE avalik=1");
-    $kask->bind_result($id, $tantsupaar, $punktid, $paev);
+    $kask=$yhendus->prepare("SELECT id, tantsupaar, punktid, ava_paev, kommentaarid FROM tantsud WHERE avalik=1");
+    $kask->bind_result($id, $tantsupaar, $punktid, $paev, $komment);
     $kask->execute();
     while($kask->fetch()){
         echo "<tr>";
@@ -78,6 +79,14 @@ if (isset($_SESSION["kasutaja"])) {
         echo "<td>".$tantsupaar."</td>";
         echo "<td>".$punktid."</td>";
         echo "<td>".$paev."</td>";
+        echo "<td>".$komment."</td>";
+        echo "<td>
+<form action='?'>
+        <input type='hidden'  value='$id' name='komment'>
+        <input type='text' name='uuskomment' id='uuskomment'>
+        <input type='submit' value='OK'>
+</form>
+        ";
         echo "<td><a href='?heatants=$id'>Lisa +1punkt</a></td>";
 
         echo "</tr>";
