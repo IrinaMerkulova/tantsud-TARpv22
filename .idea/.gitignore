@@ -6,3 +6,7 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/modules.xml
+/php.xml
+/tantsudTahtega.iml
+/vcs.xml
