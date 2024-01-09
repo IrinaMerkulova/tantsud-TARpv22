@@ -95,8 +95,8 @@ if (isset($_SESSION["kasutaja"])) {
         echo "<td>".$tantsupaar."</td>";
         echo "<td>".$punktid."</td>";
         echo "<td>".$paev."</td>";
-        echo "<td>".$komment."</td>";
-        $komment=nl2br(htmlspecialchars($komment));
+        echo "<td>".nl2br(htmlspecialchars($komment))."</td>";
+
         echo "<td>
 <form action='?'>
         <input type='hidden'  value='$id' name='komment'>
